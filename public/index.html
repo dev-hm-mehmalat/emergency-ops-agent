@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergency Service Staff</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="css/styles.css"> <!-- Link zur CSS-Datei -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background: #f9f9f9;
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Emergency Service Staff</h1>
+    <ul id="emergencyStaffList"></ul>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Document loaded');
+            axios.get('/api/emergency-service')
+                .then(function (response) {
+                    console.log('API response:', response.data);
+                    const emergencyStaffList = document.getElementById('emergencyStaffList');
+                    emergencyStaffList.innerHTML = ''; // Clear any existing content
+                    response.data.data.forEach(function(staff) {
+                        const li = document.createElement('li');
+                        li.textContent = `Name: ${staff.name}, Phone: ${staff.phone}, Email: ${staff.email}`;
+                        emergencyStaffList.appendChild(li);
+                    });
+                })
+                .catch(function (error) {
+                    console.error('Error fetching emergency service data:', error);
+                });
+        });
+    </script>
+</body>
+</html>

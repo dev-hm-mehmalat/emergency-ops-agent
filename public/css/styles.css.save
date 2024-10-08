@@ -1,0 +1,17 @@
+/* Unterstützt fit-content für Firefox */
+.width-fit-content {
+    width: -moz-fit-content;
+    width: fit-content;
+}
+
+.height-fit-content {
+    height: -moz-fit-content;
+    height: fit-content;
+}
+
+/* Alternativ für break-spaces */
+.white-space-break-spaces {
+    white-space: break-spaces;
+    white-space: pre-wrap; /* Alternative für breitere Unterstützung */
+}
+

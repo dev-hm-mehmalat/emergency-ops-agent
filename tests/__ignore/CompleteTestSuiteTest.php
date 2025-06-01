@@ -2,8 +2,8 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class CompleteTestSuiteTest extends TestCase
 {
@@ -27,13 +27,13 @@ class CompleteTestSuiteTest extends TestCase
         $this->planId = $response->json('id');
     }
 
-    public function testApiEndpoints()
+    public function test_api_endpoints()
     {
         $response = $this->get('/api/emergency-service');
         $response->assertStatus(200);
     }
 
-    public function testUserRegistration()
+    public function test_user_registration()
     {
         $response = $this->post('/register', [
             'name' => 'Test User',
@@ -45,7 +45,7 @@ class CompleteTestSuiteTest extends TestCase
         $response->assertStatus(201);
     }
 
-    public function testCreateEmergencyPlan()
+    public function test_create_emergency_plan()
     {
         $response = $this->post('/api/emergency-plan', [
             'name' => 'New Plan',
@@ -58,7 +58,7 @@ class CompleteTestSuiteTest extends TestCase
         $response->assertStatus(201);
     }
 
-    public function testUpdateEmergencyPlan()
+    public function test_update_emergency_plan()
     {
         // Verwende den in setUp() erstellten Plan zum Aktualisieren
         $response = $this->put("/api/emergency-plan/{$this->planId}", [
@@ -69,7 +69,7 @@ class CompleteTestSuiteTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function testDeleteEmergencyPlan()
+    public function test_delete_emergency_plan()
     {
         // Lösche den in setUp() erstellten Plan
         $response = $this->delete("/api/emergency-plan/{$this->planId}");

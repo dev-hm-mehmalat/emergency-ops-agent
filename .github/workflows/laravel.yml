@@ -2,30 +2,30 @@ name: Laravel CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [main]
   pull_request:
-    branches: [ "main" ]
+    branches: [main]
 
 jobs:
-  laravel-test:
+  laravel-tests:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 📥 Checkout Code
+      - name: 📦 Checkout Repository
         uses: actions/checkout@v4
 
-      - name: 🛠 Setup PHP
+      - name: ⚙️ Setup PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.2'
-          extensions: mbstring, bcmath
+          extensions: mbstring, bcmath, curl, fileinfo, json, openssl
           coverage: none
 
-      - name: 📦 Install Dependencies
-        run: composer install --no-progress --prefer-dist --no-interaction
+      - name: 🧩 Install Composer dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest
 
-      - name: 🔑 Generate App Key
+      - name: 🔧 Set Laravel App Key
         run: php artisan key:generate
 
-      - name: ✅ Run Tests
+      - name: ✅ Run Laravel tests
         run: php artisan test

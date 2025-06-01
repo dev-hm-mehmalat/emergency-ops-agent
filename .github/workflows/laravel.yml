@@ -24,6 +24,9 @@ jobs:
       - name: 🧩 Install Composer dependencies
         run: composer install --prefer-dist --no-progress --no-suggest
 
+      - name: 📄 Copy .env file
+        run: cp .env.example .env
+
       - name: 🔧 Set Laravel App Key
         run: php artisan key:generate
 
